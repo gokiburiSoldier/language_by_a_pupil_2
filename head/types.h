@@ -1,3 +1,6 @@
+#ifndef _NING_TYPES_H
+#define _NING_TYPES_H
+
 #include <string>
 
 #define INT 0x101
@@ -20,6 +23,7 @@ namespace tp {
                                  else         floating = true;
             else 
                 return false;
+        return true;
     }
     bool isStr(std::string s) {
         int end = s.length()-1;
@@ -36,3 +40,5 @@ namespace tp {
         else return -1;
     }
 }
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef _NING_ERROR_H
+#define _NING_ERROR_H
+
 #include <string>
 #include <cstdlib>
 #include <iostream>
@@ -5,6 +8,7 @@
 #define FILE_NOT_FOUND 0xe00
 #define SYNAX_ERROE    0xe01
 #define DEF_AGAIN      0xe02
+#define ERR_TYPE       0xe03
 
 #define NO_ERROR 114514
 
@@ -18,3 +22,5 @@ namespace err {
         }
     };
 }
+
+#endif

@@ -1,6 +1,9 @@
 /*
  * 数据类型转换
  */
+#ifndef _NING_TRANS_H
+#define _NING_TRANS_H
+
 #include "types.h"
 #include <string>
 #include <algorithm>
@@ -27,3 +30,5 @@ namespace tr {
         return r;
     }
 }
+
+#endif
