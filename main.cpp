@@ -3,8 +3,12 @@
  */
 
 #include "run.h"
+#include "head/keywI.h"
 #include "main.h"
 
 int main(int argc,char* argv[]) {
-    cout << "\033[31m123\033[0m" << endl;
+    str::init();
+    getline(cin,n);
+    vector<string> v = run::sent_split(n);
+    kw::print(v);
 }

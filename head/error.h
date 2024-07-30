@@ -9,6 +9,7 @@
 #define SYNAX_ERROE    0xe01
 #define DEF_AGAIN      0xe02
 #define ERR_TYPE       0xe03
+#define ASSIGN_CONST   0xe04
 
 #define NO_ERROR 114514
 

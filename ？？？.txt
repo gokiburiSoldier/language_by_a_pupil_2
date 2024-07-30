@@ -1,0 +1,12 @@
+run.h
+
+/*  到时候再处理  */
+/*case ';':
+if(i == len-1) break;
+if(token != "") rt.push_back(token);
+token = "";
+rt.push_back(";");
+r = run::sent_split(sent.substr(i,len-i));
+rt.insert(rt.end(),r.begin(),r.end());
+return rt;
+break;*/

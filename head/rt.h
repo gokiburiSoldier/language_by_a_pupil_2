@@ -9,12 +9,31 @@
 #include <string>
 #include <vector>
 #include "types.h"
+#include "error.h"
 
 struct Rt {
     int rt_type;
     std::string value;
     int length = -1;
     std::vector<int> label = {VAR};
+};
+
+template<class T>
+class varp {
+    private:
+        T val;
+        int length;
+        bool isConst = true;
+    public:
+        varp(bool ic = true) {
+            this->isConst = ic;
+        }
+        T get_val(void) const {return this->val;}
+        int assign(T v) {
+            if(this->isConst) return ASSIGN_CONST;
+            this->val = v;
+            return NO_ERROR;
+        }
 };
 
 #endif
