@@ -8,9 +8,19 @@
 
 int main(int argc,char* argv[]) {
     str::init();
-    for(int i=0;i<2;++i) {
-        getline(cin,n);
-        vector<string> v = run::sent_split(n);
-        run::run_sent(v);
+    if(argc > 1) {
+        /* 为什么用static_case? 因为它善 */
+        lines = fs::readf(static_cast<string>(argv[1]));
+        for(std::string i : lines) {
+            int len = i.length();
+            if(commenting) {
+                if(str::count(i,"*/") == 1) commenting = false;
+                continue;
+            }
+            /* 盲猜一波 len不可能为0x0 */
+            if(len-1 > 0 && i[len-1] == ';') i.pop_back();
+            if(i == "/*") commenting = true;
+            else chuli_code(i);
+        }
     }
 }

@@ -25,5 +25,8 @@ namespace vr {
             cout << i->first << "->" << i->second.value << endl;*/
         return NO_ERROR;
     }
+    void check(string &str) {
+        if(variables.count(str)) str = variables[str].value;
+    }
 } 
 #endif

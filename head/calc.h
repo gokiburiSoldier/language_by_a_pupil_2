@@ -59,6 +59,10 @@ namespace num {
         for(int i=0;i<lena;++i) if(a[i] != b[i]) return a[i] < b[i];
         return false;
     }
+    string full_subt(string a,string b) {
+        if(compare(a,b)) return subtra(a,b);
+        return "-"+subtra(b,a);
+    }
     string mul(string a,string b) {
         string rt;
         int lena=a.length(),lenb=b.length();
@@ -99,7 +103,7 @@ namespace cl {
                 break;
             case 1:
                 elem = express[0];
-                if(vr::variables.count(elem)) elem = vr::variables[elem].value;
+                vr::check(elem);
                 t = tp::getType(elem);
                 ret.value = elem;
                 if(t != -1) {
@@ -108,9 +112,24 @@ namespace cl {
                 }
                 ret.rt_type = ERR;
                 break;
+            case 3:
+                /* 这里就不用 getcode和switch了 */
+                ret.rt_type = INT;
+                vr::check(express[0]);
+                vr::check(express[2]);
+                if(!(tp::isNum(express[0]) && tp::isNum(express[2]))) {
+                    ret.rt_type = ERR;
+                    break;
+                }
+                if(express[1] == "+") ret.value = num::add(express[0],express[2]);
+                else if(express[1] == "-") ret.value = num::full_subt(express[0],express[2]);
+                else if(express[1] == "*") ret.value = num::mul(express[0],express[2]);
+                else ret.rt_type = ERR;
+                break;
             default:
                 ret.rt_type = ERR;
         }
+        //if(ret.rt_type-ERR) cout << ret.value << endl;
         return ret;
     }
 }

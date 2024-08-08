@@ -12,9 +12,15 @@ namespace str {
     void replace(string &str,string before,string after) {
         int len = before.length(),
             lens = str.length();
-        for(int i=0;i<lens-len-1;++i) {
+        for(int i=0;i<lens-len;++i) {
             if(str.substr(i,len) == before) str.replace(i,len,after);
         }
+    }
+    int count(string str,string fd) {
+        int ret = 0,lena = str.length(),lenb = fd.length();
+        for(int i=0;i<=lena-lenb;++i) 
+            if(str.substr(i,lenb) == fd) ++ret;
+        return ret;
     }
     void init(void) {
         if(inited) return;
