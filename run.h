@@ -10,6 +10,7 @@
 #include "head/fs.h"
 #include "head/error.h"
 #include "head/var.h"
+#include "head/keywI.h"
 
 namespace run {
 
@@ -48,10 +49,14 @@ vector<string> sent_split(string sent) {
                 if(token != "") rt.push_back(token);
                 token = "";
                 rt.push_back(t);
-                if(c == '/' && i != len-1 && sent[i+1] == '/') {
+                if(c == '/' && i != len-1 && sent[i+1] == '/') { /* 注释 */
                     rt.pop_back();
                     return rt;
                 }
+                break;
+            case '#': /* 也是注释 */
+                if(token != "") rt.push_back(token);
+                return rt;
                 break;
             case '\'':
             case '"':
@@ -64,6 +69,24 @@ vector<string> sent_split(string sent) {
     }
     if(token != "") rt.push_back(token);
     return rt;
+}
+
+int run_sent(vector<string> sent) {
+    if(sent.empty()) return NO_ERROR;
+    long long key = getcode(sent[0]);
+    switch(key) {
+        case kw_cd::print:
+            kw::print(sent);
+            break;
+        case kw_cd::var:
+            if(sent.size() < 4 && sent[2] != "=") return NO_ERROR; /* 到时候记得改 */
+            vr::new_glb(sent[1],sent[3]);
+            break;
+        default:
+            return NOT_FOUND_KEY;
+            break;
+    }
+    return NO_ERROR;
 }
 
 }

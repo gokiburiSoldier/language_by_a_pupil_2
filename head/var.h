@@ -5,6 +5,7 @@
 #include "rt.h"
 #include "trans.h"
 #include "error.h"
+#include "../get_code.h"
 #include <map>
 using namespace std;
 
@@ -20,6 +21,8 @@ namespace vr {
         v.value = val;
         if(ty == STR) v.length = val.length()-2;
         variables[name] = v;
+        /*for(map<string,Rt>::iterator i = variables.begin();i != variables.end(); ++ i) 
+            cout << i->first << "->" << i->second.value << endl;*/
         return NO_ERROR;
     }
 } 

@@ -1,0 +1,4 @@
+// F**k,I cannot write a ';'
+
+var v = 1
+print v

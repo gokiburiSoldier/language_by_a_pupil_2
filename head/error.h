@@ -10,6 +10,7 @@
 #define DEF_AGAIN      0xe02
 #define ERR_TYPE       0xe03
 #define ASSIGN_CONST   0xe04
+#define NOT_FOUND_KEY  0xe05
 
 #define NO_ERROR 114514
 

@@ -6,6 +6,7 @@
 #define INT 0x101
 #define BOOL 0x102
 #define STR 0x103
+#define ERR 0x104
 
 #define VAR 0x004
 #define FUNC 0x005

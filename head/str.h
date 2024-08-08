@@ -4,10 +4,18 @@
 #include <string>
 #include <map>
 #include <stdio.h>
+#include <algorithm>
 
 namespace str {
     std::map<std::string,std::string> escaping;
     bool inited = false;
+    void replace(string &str,string before,string after) {
+        int len = before.length(),
+            lens = str.length();
+        for(int i=0;i<lens-len-1;++i) {
+            if(str.substr(i,len) == before) str.replace(i,len,after);
+        }
+    }
     void init(void) {
         if(inited) return;
         inited = true;
@@ -18,11 +26,7 @@ namespace str {
     }
     std::string escape(std::string s) {
         for(std::map<std::string,std::string>::iterator i=escaping.begin();i != escaping.end();++i) {
-            int a = s.find(i->first);
-            while(a != std::string::npos) {
-                s = s.replace(a,a+(i->first.length())-1,i->second);
-                a = s.find(i->first);
-            }
+            replace(s,i->first,i->second);
         }
         return s;
     }

@@ -8,7 +8,9 @@
 
 int main(int argc,char* argv[]) {
     str::init();
-    getline(cin,n);
-    vector<string> v = run::sent_split(n);
-    kw::print(v);
+    for(int i=0;i<2;++i) {
+        getline(cin,n);
+        vector<string> v = run::sent_split(n);
+        run::run_sent(v);
+    }
 }
