@@ -47,10 +47,11 @@ namespace kw_cd {
     input = 211898,
     var = 185766,
     if_ = 87449,
-    for_ = 83298,
     while_ = 218878,
     seted = 323176,
-    setsp = 421085;
+    setsp = 421085,
+    plusplus = 29141,
+    jump = 301003; /* ++ */
 }
 
 

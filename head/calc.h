@@ -89,7 +89,31 @@ namespace num {
 }
 
 namespace bl {
-    ;
+    bool eq(string a,string b) {
+        vr::check(a);
+        vr::check(b);
+        return a == b;
+    }
+    bool cl(vector<string> exp) {
+        if(exp[0] == "if");
+        bool ret = true;
+        switch(exp.size()) {
+            /* 1和2到时候写 */
+            case 1:
+                ret = false;
+                break;
+            case 2:
+                ret = false;
+                break;
+            case 3:
+                vr::check(exp[0]);
+                vr::check(exp[2]);
+                if(exp[1] == "==") ret = exp[0] == exp[2];
+                else if(exp[1] == "!=") ret = exp[0] != exp[2];
+                break;
+        }
+        return ret;
+    }
 }
 
 namespace cl {
@@ -129,7 +153,6 @@ namespace cl {
             default:
                 ret.rt_type = ERR;
         }
-        //if(ret.rt_type-ERR) cout << ret.value << endl;
         return ret;
     }
 }

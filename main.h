@@ -1,13 +1,17 @@
 #include <string>
 #include <vector>
+#include "run.h"
+#include "head/keywI.h"
 
 std::string n;
 std::vector<std::string> lines;
 bool commenting = false;
+int sz;
 
-void chuli_code(string code) {
+req::Req chuli_code(string code) {
     err::Error e;
-    switch(run::run_code(code)) {
+    req::Req r = run::run_code(code);
+    switch(r.error) {
         case FILE_NOT_FOUND:
             e.content = "File Not Found";
             e.num     = FILE_NOT_FOUND;
@@ -37,4 +41,5 @@ void chuli_code(string code) {
             break;
     }
     if(e.num != NO_ERROR) e.show();
+    return r;
 }

@@ -9,7 +9,7 @@ long long pow(long long a,long long n) {
     else if(n == 0) return 1;
     return pow(a*a,n >> 1) * (n & (n-1) ? a : 1);*/
     long long res = 1;
-    for(int i=1;i<=n;++i) {
+    for(long long i=1;i<=n;++i) {
         res *= a;
         if(res >= MOD_NUMBER) res %= MOD_NUMBER;
     }
