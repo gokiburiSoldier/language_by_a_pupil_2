@@ -18,6 +18,11 @@ struct Rt {
     std::vector<int> label = {VAR};
 };
 
+struct Sentence {
+    long long num;
+    int begin_pos;
+};
+
 template<class T>
 class varp {
     private:

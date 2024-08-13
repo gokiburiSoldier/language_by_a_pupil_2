@@ -1,8 +1,13 @@
 var n = 0;
 
-print n;
-++ n;
+seted "";
 
-if n != 3 {
-    jump 9;
+while n != 8 {
+    var m = 0;
+    while m != 8 {
+        print "X";
+        ++ m;
+    }
+    ++ n;
+    print "\n";
 }

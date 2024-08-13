@@ -15,8 +15,7 @@
 
 namespace run {
 
-int record = 0,now = -1;
-bool looping = false;
+vector<Sentence> loops;
 
 vector<string> sent_split(string sent) {
     int len = sent.length();
@@ -96,6 +95,7 @@ req::Req run_sent(vector<string> sent) {
     }
     long long key = getcode(sent[0]);
     int sz;
+    Sentence s;
     switch(key) {
         case kw_cd::print:
             kw::print(sent);
@@ -174,6 +174,7 @@ req::Req run_sent(vector<string> sent) {
             sent.erase(sent.begin());
             ret.running = bl::cl(sent);
             ret.error = NO_ERROR;
+            loops[loops.size()-1].num = kw_cd::if_;
             return ret;
             break;
         case kw_cd::plusplus:
@@ -203,7 +204,29 @@ req::Req run_sent(vector<string> sent) {
             }
             ret.jumping = tr::str_to_int(sent[1])-1;
             break;
+        case kw_cd::while_:
+            if(sent.size() < 3 || sent[sent.size()-1] != "{") {
+                ret.error = SYNAX_ERROE;
+                return ret;
+            }
+            sent.erase(sent.begin());
+            sent.pop_back();
+            loops[loops.size()-1].num = kw_cd::while_;
+            if(!bl::cl(sent)) {
+                ret.running = false;
+                ret.error = NO_ERROR;
+                loops.pop_back();
+                return ret;
+            }
+            break;
         case 100224: /* 100224 -> getcode("}") */
+            if(loops[loops.size()-1].num == kw_cd::while_) {
+                ret.error = NO_ERROR;
+                ret.jumping = loops[loops.size()-1].begin_pos;
+                loops.pop_back();
+                return ret;
+            }
+            loops.pop_back();
             break;
         default:
             ret.error =  NOT_FOUND_KEY;
@@ -215,7 +238,6 @@ req::Req run_sent(vector<string> sent) {
 }
 
 req::Req run_code(string code) {
-    ++ now;
     return run_sent(sent_split(code));
 }
 

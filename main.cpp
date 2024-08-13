@@ -17,12 +17,24 @@ int main(int argc,char* argv[]) {
                 continue;
             }
             /* 盲猜一波 len不可能为0x0 */
-            if(len-1 > 0 && i[len-1] == ';') i.pop_back();
-            if(i == "/*") commenting = true;
-            else {
-                req::Req res = chuli_code(i);
-                if(res.jumping != -1) l = res.jumping;
-                else if(!res.running) while(l < sz && lines[l] != "}") ++ l;
+            if(len-1 > 0 && i[len-1] == ';') {
+                i.pop_back();
+                -- len;
+            }
+            if(i == "/*") {
+                commenting = true;
+                continue;
+            }
+            else if(len-1 >= 0 && i[len-1] == '{') {
+                Sentence s;
+                s.begin_pos = l-1;
+                //cout << "  " << l << endl;
+                run::loops.push_back(s);
+            }
+            req::Req res = chuli_code(i);
+            if(res.jumping != -1) l = res.jumping;
+            else if(!res.running) {
+                while(l < sz && lines[l].find('}') == string::npos) ++ l;
             }
         }
     }

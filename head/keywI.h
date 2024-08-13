@@ -54,5 +54,4 @@ namespace kw_cd {
     jump = 301003; /* ++ */
 }
 
-
 #endif
