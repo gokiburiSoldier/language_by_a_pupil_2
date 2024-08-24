@@ -39,6 +39,15 @@ vector<string> sent_split(string sent) {
                 if(token != "") rt.push_back(token);
                 token = "";
                 break;
+            case '$':
+                /* '$'开头的变量需要遇到空格或者逗号为止 */
+                /* 权限最大 就跟夏莱一样 */
+                if(token != "") rt.push_back(token);
+                while(i < len && sent[i] != ' ' && sent[i] != ',') token += sent[i++];
+                --i;
+                rt.push_back(token);
+                token = "";
+                break;
             case ',':
             case '(':
             case ')':
@@ -175,6 +184,7 @@ req::Req run_sent(vector<string> sent) {
             ret.running = bl::cl(sent);
             ret.error = NO_ERROR;
             loops[loops.size()-1].num = kw_cd::if_;
+            if(!ret.running) loops.pop_back();
             return ret;
             break;
         case kw_cd::plusplus:

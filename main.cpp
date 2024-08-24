@@ -11,6 +11,7 @@ int main(int argc,char* argv[]) {
         sz = lines.size();
         for(int l=0;l<sz;++l) {
             std::string i = lines[l];
+            str::replace(i,"\t","    "); /* 为什么vim和Dev-CPP默认是Tab！！！ */
             int len = i.length();
             if(commenting) {
                 if(str::count(i,"*/") == 1) commenting = false;
