@@ -15,7 +15,7 @@ struct Rt {
     int rt_type;
     std::string value;
     int length = -1;
-    std::vector<int> label = {VAR};
+    int label = VAR;
 };
 
 struct Sentence {

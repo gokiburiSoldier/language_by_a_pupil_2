@@ -12,21 +12,27 @@ using namespace std;
 namespace vr {
     map<string,Rt> variables;
 
-    int new_glb(string name,string val) {
+    int new_glb(string name,string val,bool isConst=false) {
         Rt v;
-        if(variables.count(name)) v = variables[name];                         
+        if(variables.count(name)) {
+            if(variables[name].label == CONST) return ASSIGN_CONST;
+            v = variables[name];
+        }
         int ty = tp::getType(val);
         if(ty == -1) return ERR_TYPE;
         v.rt_type = ty;
         v.value = val;
         if(ty == STR) v.length = val.length()-2;
+        if(isConst) v.label = CONST;
         variables[name] = v;
-        /*for(map<string,Rt>::iterator i = variables.begin();i != variables.end(); ++ i) 
-            cout << i->first << "->" << i->second.value << endl;*/
         return NO_ERROR;
     }
     void check(string &str) {
         if(variables.count(str)) str = variables[str].value;
+    }
+    void get(void) {
+        for(map<string,Rt>::iterator i = variables.begin();i != variables.end(); ++ i) 
+            cout << i->first << "->" << i->second.value << endl;
     }
 } 
 #endif

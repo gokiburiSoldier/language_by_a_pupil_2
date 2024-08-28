@@ -51,7 +51,8 @@ namespace kw_cd {
     seted = 323176,
     setsp = 421085,
     plusplus = 29141,
-    jump = 301003; /* ++ */
+    jump = 301003,
+    const_ = 262808; /* ++ */
 }
 
 #endif

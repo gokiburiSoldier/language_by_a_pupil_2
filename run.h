@@ -1,8 +1,6 @@
 #ifndef _NING_RUN_H
 #define _NING_RUN_H
 
-#include <map>
-
 #include "head/stdhead.h"
 #include "head/rt.h"
 #include "head/trans.h"
@@ -80,6 +78,7 @@ vector<string> sent_split(string sent) {
                 }
                 break;
             case '#': /* 也是注释 */
+            case ';': /* 刚好代码相同 */
                 if(token != "") rt.push_back(token);
                 return rt;
                 break;
@@ -152,7 +151,7 @@ req::Req run_sent(vector<string> sent) {
                 return ret;
             }
             else if(!vr::variables.count(sent[1])) {
-                ret.error =  SYNAX_ERROE;
+                ret.error =  NOT_FOUND_KEY;
                 return ret;
             } /* 到时候改 */
             else if(sent.size() > 3) {
@@ -228,6 +227,14 @@ req::Req run_sent(vector<string> sent) {
                 loops.pop_back();
                 return ret;
             }
+            break;
+        case kw_cd::const_:
+            if(sent.size() < 4 || sent[2] != "=") {
+                ret.error = SYNAX_ERROE;
+                return ret;
+            }
+            ret.error = vr::new_glb(sent[1],sent[3],true);
+            return ret;
             break;
         case 100224: /* 100224 -> getcode("}") */
             if(loops[loops.size()-1].num == kw_cd::while_) {
