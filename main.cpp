@@ -1,5 +1,7 @@
 /*
  * 十年OI一场空 不开long long见祖宗
+ * 长期CSP/GESP/NOI导致的
+ * Blue Archive,启动！
  */
 #include "main.h"
 
@@ -16,6 +18,7 @@ int main(int argc,char* argv[]) {
             vr::variables["__line__"] = var_line;
             std::string i = lines[l];
             str::replace(i,"\t"," "); /* 为什么vim和Dev-CPP默认是Tab！！！ */
+            /* 为什么用Dev-CPP写！！！ */
             int len = i.length();
             if(commenting) {
                 commenting = str::count(i,"*/") != 1;

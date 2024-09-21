@@ -117,41 +117,76 @@ namespace bl {
 }
 
 namespace cl {
-    Rt calc(vector<string> express) {
-        int len = express.size(),t;
+    int get_level(string s,int cnt) { /* 应该不会有人写21亿个括号 */
+        if(cnt) cnt += 66;
+        if(s == "=") return cnt; /* 0+cnt */
+        else if(s == "+" || s == "-") return 1+cnt;
+        else if(s == "*" || s == "/") return 2+cnt;
+        else if(s == "**" || s == "%") return 3+cnt;
+        else if(s == "==" || s == "!=") return 4+cnt;
+        return -1;
+    }
+    int getmin(vector<string> express) {
+        int cnt = 0,index = -1,minx = 2147483647,len=express.size(),t;
+        for(int i=0;i<len;++i) {
+            if(express[i] == "(") {
+                cnt++;
+                continue;
+            }
+            else if(express[i] == ")") {
+                cnt--;
+                continue;
+            }
+            if((t=get_level(express[i],cnt)) != -1 && t < minx) {
+                minx = t;
+                index = i;
+            }
+        }
+        return index;
+    }
+    Rt calc(vector<string> express,bool check=true) {
         Rt ret;
-        string elem;
-        switch(len) {
-            case 0:
-                ret.rt_type = ERR;
+        ret.rt_type = INT;
+        int len = express.size(),index;
+        if(express[0] == "(" && express[len-1] == ")") {
+            express.erase(express.begin());
+            express.pop_back();
+            len -= 2;
+        }
+        if(len == 1) {
+            if(check) vr::check(express[0]);
+            ret.value = express[0];
+            return ret;
+        }
+        index = getmin(express);
+        vector<string> left (express.begin(),express.begin()+index),
+                       right (express.begin()+index+1,express.end());
+        /* 判断运算符 */
+        switch(express[index][0]) {
+            case '+':
+                ret.value = num::add(calc(left).value,calc(right).value);
                 break;
-            case 1:
-                elem = express[0];
-                vr::check(elem);
-                t = tp::getType(elem);
-                ret.value = elem;
-                if(t != -1) {
-                    ret.rt_type = t;
-                    break;
+            case '-':
+                ret.value = num::subtra(calc(left).value,calc(right).value);
+                break;
+            case '*':
+                ret.value = num::mul(calc(left).value,calc(right).value);
+                break;
+            case '/':
+                ret.value = num::add(calc(left).value,calc(right).value);
+                break;
+            case '=':
+                if(express[index].length() > 1) {
+                    ret.rt_type = BOOL;
+                    ret.length = calc(left).value == calc(right).value;
+                } else {
+                    ret = calc(right);
+                    vr::new_glb(left[0],ret.value);
                 }
-                ret.rt_type = ERR;
                 break;
-            case 3:
-                /* 这里就不用 getcode和switch了 */
-                ret.rt_type = INT;
-                vr::check(express[0]);
-                vr::check(express[2]);
-                if(!(tp::isNum(express[0]) && tp::isNum(express[2]))) {
-                    ret.rt_type = ERR;
-                    break;
-                }
-                if(express[1] == "+") ret.value = num::add(express[0],express[2]);
-                else if(express[1] == "-") ret.value = num::full_subt(express[0],express[2]);
-                else if(express[1] == "*") ret.value = num::mul(express[0],express[2]);
-                else ret.rt_type = ERR;
+            case '!':
+                ;
                 break;
-            default:
-                ret.rt_type = ERR;
         }
         return ret;
     }

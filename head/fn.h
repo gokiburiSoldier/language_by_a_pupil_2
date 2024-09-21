@@ -5,6 +5,10 @@
 #include "req.h"
 #include "error.h"
 
+#define IMPORT 0xa1
+#define BUILDIN 0xa2
+#define USERDEF 0xa3
+
 namespace fn {
     struct arg {
         /* 函数参数统一结构 */

@@ -246,8 +246,7 @@ req::Req run_sent(vector<string> sent) {
             loops.pop_back();
             break;
         default:
-            ret.error =  NOT_FOUND_KEY;
-            return ret;
+            cl::calc(sent);
             break;
     }
     ret.error = NO_ERROR;
