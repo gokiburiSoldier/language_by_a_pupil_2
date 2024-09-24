@@ -17,8 +17,7 @@ namespace kw {
         vector<string> every_unit;
         for(int i=0;i<len;++i) {
             string ci = cont[i];
-            if(ci == "print") continue;
-            else if(ci == "," || ci == ";") {
+            if(ci == "," || ci == ";") {
                 Rt out = cl::calc(every_unit);
                 if(out.rt_type == ERR) return -1;
                 else if(out.rt_type != STR) cout << out.value;
@@ -43,16 +42,16 @@ namespace kw {
 
 namespace kw_cd {
     const long long 
-    print = 236174,
-    input = 211898,
-    var = 185766,
-    if_ = 87449,
-    while_ = 218878,
-    seted = 323176,
-    setsp = 421085,
-    plusplus = 29141,
-    jump = 301003,
-    const_ = 262808; /* ++ */
+    print = 4397,
+    input = 11946,
+    var = 12288,
+    if_ = 857,
+    while_ = 15023,
+    seted = 19654,
+    setsp = 15013,
+    plusplus = 430,
+    jump = 17367,
+    const_ = 13299; /* ++ */
 }
 
 #endif

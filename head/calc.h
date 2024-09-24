@@ -148,7 +148,7 @@ namespace cl {
         Rt ret;
         ret.rt_type = INT;
         int len = express.size(),index;
-        if(express[0] == "(" && express[len-1] == ")") {
+        if(express[0] == "(" && len != 1 && express[len-1] == ")") {
             express.erase(express.begin());
             express.pop_back();
             len -= 2;

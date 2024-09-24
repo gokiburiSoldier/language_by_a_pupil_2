@@ -106,6 +106,7 @@ req::Req run_sent(vector<string> sent) {
     Sentence s;
     switch(key) {
         case kw_cd::print:
+            sent.erase(sent.begin());
             kw::print(sent);
             break;
         case kw_cd::var:

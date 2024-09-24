@@ -2,23 +2,21 @@
 #define _ZJX_GETCODE_H
 
 #include <string>
-#define MOD_NUMBER 114514
+const int MOD_NUMBER=10007;
 
 long long pow(long long a,long long n) {
-    /*if(n == 1) return a;
-    else if(n == 0) return 1;
-    return pow(a*a,n >> 1) * (n & (n-1) ? a : 1);*/
     long long res = 1;
-    for(long long i=1;i<=n;++i) {
-        res *= a;
-        if(res >= MOD_NUMBER) res %= MOD_NUMBER;
+    while(n) {
+        if(n&1) res = ((res%MOD_NUMBER)*(a&MOD_NUMBER))%MOD_NUMBER;
+        a = ((a&MOD_NUMBER)*(a&MOD_NUMBER))%MOD_NUMBER;
+        n >>= 1;
     }
     return res;
 }
 
 int primes[] = {2,3,5,7,11,13,17,19,23,29,31,37};
 
-char anay(char c) { /* 为什么不用`char &c` 因为不习惯 */
+inline char anay(char c) { /* 为什么不用`char &c` 因为不习惯 */
     if(c >= '0' && c <= '9') c -= '0';
     else if(c >= 'A' && c <= 'Z') c -= 'A'-10;
     else if(c >= 'a' && c <= 'z') c -= 'a'-36;
