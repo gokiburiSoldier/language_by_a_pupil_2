@@ -7,7 +7,7 @@
 #include <map>
 
 #define FILE_NOT_FOUND 0xe00
-#define SYNAX_ERROE    0xe01
+#define SYNAX_ERROE    0xe01 /* 我的天那 写了这么久 没发现是"E" */
 #define DEF_AGAIN      0xe02
 #define ERR_TYPE       0xe03
 #define ASSIGN_CONST   0xe04

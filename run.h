@@ -13,7 +13,7 @@
 
 namespace run {
 
-vector<Sentence> loops;
+vector<sent_stack> loops;
 
 vector<string> sent_split(string sent) {
     int len = sent.length();
@@ -46,17 +46,10 @@ vector<string> sent_split(string sent) {
                 rt.push_back(token);
                 token = "";
                 break;
-            case ',':
-            case '(':
-            case ')':
-            case '+':
-            case '-':
-            case '*':
-            case '/':
-            case '=':
-            case '{':
-            case '}':
-            case '!':
+            case ',': case '(': case ')':
+            case '+': case '-': case '*':
+            case '/': case '=': case '{':
+            case '}': case '!':
                 t = "";
                 t += c;
                 if(token != "") rt.push_back(token);
@@ -86,7 +79,8 @@ vector<string> sent_split(string sent) {
             case '"':
                 sign = c;
                 stringing = true;
-                /* 这里不应该写`break;` */
+                /* 这里可以不写`break;` */
+                /* 代  码  规  范 */
             default:
                 token += c;
         }
@@ -103,7 +97,7 @@ req::Req run_sent(vector<string> sent) {
     }
     long long key = getcode(sent[0]);
     int sz;
-    Sentence s;
+    sent_stack s;
     switch(key) {
         case kw_cd::print:
             sent.erase(sent.begin());
@@ -215,6 +209,7 @@ req::Req run_sent(vector<string> sent) {
             ret.jumping = tr::str_to_int(sent[1])-1;
             break;
         case kw_cd::while_:
+            // cout << sent.size() << " " << int(sent[sent.size()-1][0]) << "\n";
             if(sent.size() < 3 || sent[sent.size()-1] != "{") {
                 ret.error = SYNAX_ERROE;
                 return ret;
@@ -237,7 +232,7 @@ req::Req run_sent(vector<string> sent) {
             ret.error = vr::new_glb(sent[1],sent[3],true);
             return ret;
             break;
-        case 100224: /* 100224 -> getcode("}") */
+        case 9601: /* 9601 == getcode("}") */
             if(loops[loops.size()-1].num == kw_cd::while_) {
                 ret.error = NO_ERROR;
                 ret.jumping = loops[loops.size()-1].begin_pos;
@@ -255,7 +250,9 @@ req::Req run_sent(vector<string> sent) {
 }
 
 req::Req run_code(string code) {
-    return run_sent(sent_split(code));
+    vector<string> vb = sent_split(code);
+    // cout << (vb[vb.size()-1][0] == char(13)) << "\n";
+    return run_sent(vb);
 }
 
 }

@@ -18,7 +18,7 @@ struct Rt {
     int label = VAR;
 };
 
-struct Sentence {
+struct sent_stack {
     long long num;
     int begin_pos;
 };

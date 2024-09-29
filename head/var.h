@@ -34,5 +34,13 @@ namespace vr {
         for(map<string,Rt>::iterator i = variables.begin();i != variables.end(); ++ i) 
             cout << i->first << "->" << i->second.value << endl;
     }
+    void global_const(void) {
+        Rt temp_const;
+        /* NML版本 */
+        temp_const.label = CONST;
+        temp_const.rt_type = INT;
+        temp_const.value = tr::int_to_str(nml_version);
+        variables["$__ver__"] = temp_const;
+    }
 } 
 #endif

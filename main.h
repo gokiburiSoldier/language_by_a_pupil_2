@@ -39,7 +39,7 @@ bool check_line(int& len,std::string& i,int l) {
     }
     if(i == "/*") return commenting = true; /* 代码规范是什么？我不知道！ */
     else if(len-1 >= 0 && i[len-1] == '{') {
-        Sentence s={.num=0,.begin_pos=l-1};
+        sent_stack s={.num=0,.begin_pos=l-1};
         run::loops.push_back(s);
     }
     return false;

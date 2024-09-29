@@ -39,6 +39,12 @@ namespace str {
     std::string no_yinghao(std::string s) {
         return s.substr(1,s.length()-2);
     }
+    void strip(std::string& str,int& len) {
+        while(len && str[len-1] == ' ') {
+            str.pop_back();
+            len--;
+        }
+    }
 }
 
 #endif
