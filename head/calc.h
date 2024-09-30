@@ -1,6 +1,8 @@
 #ifndef _NING_CLAC_H
 #define _NING_CLAC_H
 
+/* 最重要的头文件之一 */
+
 #include <algorithm>
 #include <string>
 #include "rt.h"
@@ -10,7 +12,7 @@
 using namespace std;
 
 /* The code is from: f-Shell */
-namespace num {
+namespace num { /* 高精度运算 */
     string add(string a,string b) {
         int lena = a.length(),lenb = b.length();
         if(lena < lenb) {
@@ -88,37 +90,35 @@ namespace num {
     }
 }
 
+namespace cl {
+    Rt calc(vector<string>,bool);
+}
+
 namespace bl {
-    bool eq(string a,string b) {
-        vr::check(a);
-        vr::check(b);
-        return a == b;
-    }
     bool cl(vector<string> exp) {
-        if(exp[0] == "if");
-        bool ret = true;
-        switch(exp.size()) {
-            /* 1和2到时候写 */
-            case 1:
-                ret = false;
+        Rt ret = cl::calc(exp,true);
+        bool r;
+        switch(ret.rt_type) {
+            case INT:
+                r = ret.value != "0";
                 break;
-            case 2:
-                ret = false;
+            case STR:
+                r = str::no_yinghao(ret.value) != "";
                 break;
-            case 3:
-                vr::check(exp[0]);
-                vr::check(exp[2]);
-                if(exp[1] == "==") ret = exp[0] == exp[2];
-                else if(exp[1] == "!=") ret = exp[0] != exp[2];
+            case BOOL:
+                r = ret.length;
+                break;
+            default:
+                r = false;
                 break;
         }
-        return ret;
+        return r;
     }
 }
 
 namespace cl {
-    int get_level(string s,int cnt) { /* 应该不会有人写21亿个括号 */
-        if(cnt) cnt += 66;
+    int get_level(string s,int cnt) { /* 应该不会有人写2147483647个括号 */
+        if(cnt) cnt += 114;
         if(s == "=") return cnt; /* 0+cnt */
         else if(s == "+" || s == "-") return 1+cnt;
         else if(s == "*" || s == "/") return 2+cnt;
@@ -185,7 +185,10 @@ namespace cl {
                 }
                 break;
             case '!':
-                ;
+                if(express[index].length() > 1) {
+                    ret.rt_type = BOOL;
+                    ret.length = calc(left).value != calc(right).value;
+                }
                 break;
         }
         return ret;

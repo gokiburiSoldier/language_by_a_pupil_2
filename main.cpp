@@ -10,7 +10,7 @@ int main(int argc,char* argv[]) {
     err::init();
     ci::init();
     vr::global_const();
-    #ifdef _WIN32
+    #ifdef _WIN32 /* Windows用户 */
     fs::init();
     #endif
     if(argc > 1 && (string)argv[1] != "-c") {
@@ -30,14 +30,14 @@ int main(int argc,char* argv[]) {
             }
             /* 盲猜一波 len不可能为0 */
             if(check_line(len,i,line_num)) continue;
-            req::Req res = chuli_code(i);
+            req::Req res = chuli_code(i); /* 满级命名 */
             if(res.jumping != -1) line_num = res.jumping;
             else if(!res.running) while(line_num < sz && lines[line_num].find('}') == string::npos) ++ line_num;
         }
     }else if(argc > 1 && (string)argv[1] == "-c") mode_cli();
-    #ifdef _WIN32
-    return 114514; /* 为什么return 114514?因为他善 */
-    #else
-    return 0;
-    #endif
+    else {
+        printf("使用 -c 选项进入命令行模式\n");
+    }
+
+    return 0; /* 震惊！我竟然会写 `return 0;` ! */
 }

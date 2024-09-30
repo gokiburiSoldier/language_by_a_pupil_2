@@ -41,6 +41,10 @@ namespace vr {
         temp_const.rt_type = INT;
         temp_const.value = tr::int_to_str(nml_version);
         variables["$__ver__"] = temp_const;
+        /* 操作系统 */
+        temp_const.rt_type = STR;
+        temp_const.value = "\""+sys+"\"";
+        variables["$__os__"]=temp_const;
     }
 } 
 #endif
