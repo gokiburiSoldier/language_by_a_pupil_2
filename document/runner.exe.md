@@ -35,4 +35,4 @@ PowerShell:
 ./runner "文件.cpp"
 ```
 
-此程序会先对 "<font color="#CE9178" face="宋体"><s>文件.cpp</s></font>"
+此程序会先对 "<font color="#CE9178" face="宋体">文件.cpp</font>" 进行编译 然后运行

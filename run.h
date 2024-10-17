@@ -210,6 +210,7 @@ req::Req run_sent(vector<string> sent) {
             break;
         case kw_cd::while_:
             // cout << sent.size() << " " << int(sent[sent.size()-1][0]) << "\n";
+            // cout << int(sent[sent.size()-1][0]);
             if(sent.size() < 3 || sent[sent.size()-1] != "{") {
                 ret.error = SYNAX_ERROE;
                 return ret;

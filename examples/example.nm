@@ -1,13 +1,4 @@
 var n = 0;
 
-seted "";
-
-while n != 8 {
-    var m = 0;
-    while m != 8 {
-        print "X";
-        ++ m;
-    }
-    ++ n;
-    print "\n";
+while n == 1 {
 }

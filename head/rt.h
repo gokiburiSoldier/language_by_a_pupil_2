@@ -14,8 +14,8 @@
 struct Rt {
     int rt_type;
     std::string value;
-    int length = -1;
-    int label = VAR;
+    int length;
+    int label;
 };
 
 struct sent_stack {
@@ -23,12 +23,13 @@ struct sent_stack {
     int begin_pos;
 };
 
+/*
 template<class T>
 class varp {
     private:
         T val;
         int length;
-        bool isConst = true;
+        static bool isConst;
     public:
         varp(bool ic = true) {
             this->isConst = ic;
@@ -40,5 +41,6 @@ class varp {
             return NO_ERROR;
         }
 };
+*/
 
 #endif

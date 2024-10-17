@@ -1,4 +1,3 @@
-#include <fstream>
 #include <vector>
 #include <string>
 #ifdef _WIN32
@@ -14,25 +13,22 @@ namespace fs {
     #endif
     std::vector<std::string> readf(std::string address) {
         std::vector<std::string> rt;
-        std::ifstream fin(address);
         std::string line;
-        while(getline(fin,line)) {
-            #ifdef __linux__
-            line.pop_back(); /* 行尾的回车((char)(13)) */
-            #endif
+        freopen(address.c_str(),"r",stdin);
+        while(getline(cin,line)) 
             rt.push_back(line);
-        }
+        fclose(stdin);
         return rt;
     }
-    void writef_v(std::string address,std::vector<std::string> cnt) {
-        std::ofstream fout;
-        std::string str;
-        int len = cnt.size();
-        for(int i=0;i<len;++i) str += cnt[i]+"\n";
-        fout << str;
+    void writef_v(std::string address,std::vector<std::string> contents) {
+        freopen(address.c_str(),"w",stdout);
+        int len = contents.size();
+        for(int i=0;i<len;i++) cout << contents[i] << "\n";
+        fclose(stdout);
     }
-    void writef(std::string address,std::string cnt) {
-        std::ofstream fout;
-        fout << cnt;
+    void writef(std::string address,std::string content) {
+        freopen(address.c_str(),"w",stdout);
+        cout << content << "\n";
+        fclose(stdout);
     }
 }

@@ -17,8 +17,8 @@
 
 namespace err {
     struct Error {
-        int num = FILE_NOT_FOUND;
-        std::string content = "文件未找到";
+        int num;
+        std::string content;
         void show(bool quit=true) {
             std::cerr << "\033[31mError: " << content << " (0x" << std::hex << num << std::dec << ")\033[0m\n";
             if(quit) exit(0);

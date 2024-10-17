@@ -14,6 +14,7 @@ namespace vr {
 
     int new_glb(string name,string val,bool isConst=false) {
         Rt v;
+        v.label = VAR;
         if(variables.count(name)) {
             if(variables[name].label == CONST) return ASSIGN_CONST;
             v = variables[name];

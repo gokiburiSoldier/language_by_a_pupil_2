@@ -1,7 +1,6 @@
 /* 
  * 一种数据结构
  * 此文件只是解析
- * 用于包时请见本目录下的 `package.h`
  */
 #ifndef _NML_NMON_H
 #define _NML_NMON_H
@@ -34,6 +33,5 @@ namespace nn { /* 这什么破缩写 */
         std::vector<tag> tags;
     };
 }
-
 
 #endif
