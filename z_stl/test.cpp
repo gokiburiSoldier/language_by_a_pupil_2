@@ -1,14 +1,17 @@
-#include "string.h"
-#include <stdio.h>
+#include "iostream.h"
 #include <time.h>
 
 clock_t begin,end;
+long long a,b;
 
 int main() {
     begin = clock();
-    string str;
-    str = "1145";
-    printf("%s",str.c_str());
+    io::init();
     end = clock();
-    printf("\n%ld\n",end-begin);
+    printf("\n%f\n",(double(end-begin))/CLOCKS_PER_SEC);
+    begin = clock();
+    cin >> a >> b;
+    cout << a+b;
+    end = clock();
+    printf("\n%f\n",(double(end-begin))/CLOCKS_PER_SEC);
 }

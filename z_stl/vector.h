@@ -11,7 +11,7 @@ class vector {
         ~vector() {
             delete[] vec_array;
         }
-        vector(int pre_size=1145) { /* 好臭的大小(悲) */
+        vector(int pre_size=1145,) { /* 好臭的大小(悲) */
             this->maxs = pre_size;
             this->vec_array = new T [pre_size];
             /* 填充为默认值 */
@@ -25,7 +25,7 @@ class vector {
         T* end(void) const {
             return this->vec_array+len+1;
         }
-        T& operator[] (int index) const {
+        T& operator[] (int index) {
             return this->vec_array[index];
         }
         int size(void) const {
