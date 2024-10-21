@@ -53,6 +53,15 @@ class string {
             for(int i=0;i<lent;i++) ret += this->str_bas[i+begin];
             return ret;
         }
+        void replace(int begin,int len,string after) {
+            for(int i=0;i<len;i++) this->str_bas[begin+i] = after[i];
+            /*  */
+            for(int i=begin+len;i<this->len;i++) 
+                this->str_bas[i-1] = this->str_bas[i];
+            for(int i=0;i<after.length();i++)
+                this->str_bas[this->len-1+i] = '\0';
+            this->len -= after.length() - len;
+        }
 };
 
 #endif

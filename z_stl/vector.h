@@ -3,16 +3,17 @@
 #define _Z_STL_VEC
 
 template<class T> 
-class vector {
+class z_vector { /* 自己写的vector */
     private:
         int maxs,len;
         T *vec_array;
     public:
-        ~vector() {
+        ~z_vector() {
             delete[] vec_array;
         }
-        vector(int pre_size=1145,) { /* 好臭的大小(悲) */
+        z_vector(int pre_size=1145) { /* 好臭的大小(悲) */
             this->maxs = pre_size;
+            this->len = 0;
             this->vec_array = new T [pre_size];
             /* 填充为默认值 */
             for(int i=0;i<pre_size;++i) 
@@ -25,7 +26,7 @@ class vector {
         T* end(void) const {
             return this->vec_array+len+1;
         }
-        T& operator[] (int index) {
+        T& operator[] (int index) const {
             return this->vec_array[index];
         }
         int size(void) const {

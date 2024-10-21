@@ -55,7 +55,7 @@ class istream {
 };
 
 ostream cout=0;
-ostream clog=0;
+ostream clog_=0;
 ostream cerr=1;
 
 istream cin;

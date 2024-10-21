@@ -13,3 +13,13 @@ void mode_cli(void);
 bool check_line(int&,std::string&,int);
 
 /* 我们至今不知道这个头文件有毛用 */
+
+void init_all_head(void) {
+    str::init();
+    err::init();
+    ci::init();
+    vr::global_const();
+    #ifdef _WIN32 /* Windows用户 */
+    fs::init();
+    #endif
+}

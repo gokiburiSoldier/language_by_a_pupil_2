@@ -6,13 +6,7 @@
 #include "main.h"
 
 int main(int argc,char* argv[]) {
-    str::init();
-    err::init();
-    ci::init();
-    vr::global_const();
-    #ifdef _WIN32 /* Windows用户 */
-    fs::init();
-    #endif
+    init_all_head();
     if(argc > 1 && (string)argv[1] != "-c") {
         /* 为什么用static_case? 因为它善 */
         lines = fs::readf(static_cast<string>(argv[1]));

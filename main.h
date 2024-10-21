@@ -30,7 +30,7 @@ void mode_cli(void) {
 
 bool check_line(int& len,std::string& i,int l) {
     if(len >= 1 && i[len-1] == ';') {
-        i.pop_back();
+        i.erase(i.end());
         -- len;
     }
     if(len >= 2 && i.substr(0,2) == "/*") 

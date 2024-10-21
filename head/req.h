@@ -3,10 +3,9 @@
 
 namespace req {
     struct Req {
-        int error,jumping = -1;
-        bool running = true;
+        int error,jumping;
+        bool running;
     };
 }
-
 
 #endif

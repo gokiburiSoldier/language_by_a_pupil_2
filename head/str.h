@@ -41,7 +41,7 @@ namespace str {
     }
     void strip(std::string& str,int& len) {
         while(len && str[len-1] == ' ') {
-            str.pop_back();
+            str.erase(str.end());
             len--;
         }
     }

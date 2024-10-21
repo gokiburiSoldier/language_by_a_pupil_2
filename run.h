@@ -91,10 +91,12 @@ vector<string> sent_split(string sent) {
 
 req::Req run_sent(vector<string> sent) {
     req::Req ret;
-    if(sent.empty()) {
-        ret.error = NO_ERROR;
+    ret.error = NO_ERROR;
+    ret.jumping = -1;
+    ret.running = true;
+    if(sent.empty()) 
         return ret;
-    }
+    
     long long key = getcode(sent[0]);
     int sz;
     sent_stack s;
